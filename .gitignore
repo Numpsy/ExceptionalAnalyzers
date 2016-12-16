@@ -1,0 +1,12 @@
+﻿################################################################################
+# This .gitignore file was automatically created by Microsoft(R) Visual Studio.
+################################################################################
+
+/src/.vs
+/src/ExceptionalAnalyzers/bin/Debug
+/src/ExceptionalAnalyzers/obj/Debug
+/src/ExceptionalAnalyzers.Test/bin/Debug
+/src/ExceptionalAnalyzers.Test/obj/Debug
+/src/ExceptionalAnalyzers.Vsix/bin/Debug
+/src/ExceptionalAnalyzers.Vsix/obj/Debug
+/src/packages
