@@ -101,10 +101,14 @@ namespace Exceptional.Analyzers.Analyzers
         {
             foreach (var documentedException in symbolDocumentation.Exceptions)
             {
-                var documentedExceptionTypeName = documentedException.Type.Substring(2);
-                var documentedExceptionType = context.Compilation.GetTypeByMetadataName(documentedExceptionTypeName);
-                if (thrownExceptionType.Equals(documentedExceptionType))
-                    return true;
+                var documentedExceptionTypeName = documentedException.Type?.Substring(2);
+
+                if (!string.IsNullOrEmpty(documentedExceptionTypeName))
+                {
+                    var documentedExceptionType = context.Compilation.GetTypeByMetadataName(documentedExceptionTypeName);
+                    if (thrownExceptionType.Equals(documentedExceptionType))
+                        return true;
+                }
             }
             return false;
         }
