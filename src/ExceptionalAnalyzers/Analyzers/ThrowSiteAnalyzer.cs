@@ -12,7 +12,7 @@ namespace Exceptional.Analyzers.Analyzers
     [DiagnosticAnalyzer(LanguageNames.CSharp)]
     public class ThrowSiteAnalyzer : DiagnosticAnalyzer
     {
-        public const string DiagnosticId = "Exceptional.ThrowSiteAnalyzer";
+        public const string DiagnosticId = "ExceptionalThrowSiteAnalyzer";
 
         private static readonly LocalizableString Title =
             new LocalizableResourceString(nameof(Resources.AnalyzerTitle), Resources.ResourceManager, typeof(Resources));
