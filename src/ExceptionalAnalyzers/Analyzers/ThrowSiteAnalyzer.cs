@@ -43,24 +43,32 @@ namespace Exceptional.Analyzers.Analyzers
             }
             else if (syntaxTree is PropertyDeclarationSyntax)
             {
-                foreach (var accessor in ((PropertyDeclarationSyntax)syntaxTree).AccessorList.Accessors)
+                var accessors = ((PropertyDeclarationSyntax)syntaxTree).AccessorList?.Accessors;
+
+                if (accessors != null)
                 {
-                    var throwStatements = FindThrowStatements(accessor.Body?.Statements);
-                    AnalyzeThrowStatements(throwStatements, context, syntaxTree);
+                    foreach (var accessor in accessors)
+                    {
+                        var throwStatements = FindThrowStatements(accessor.Body?.Statements);
+                        AnalyzeThrowStatements(throwStatements, context, syntaxTree);
+                    }
                 }
             }
         }
 
         private IEnumerable<ThrowStatementSyntax> FindThrowStatements(IEnumerable<StatementSyntax> statements)
         {
-            foreach (var statement in statements)
+            if (statements != null)
             {
-                if (statement is ThrowStatementSyntax)
-                    yield return (ThrowStatementSyntax)statement;
-                else
+                foreach (var statement in statements)
                 {
-                    foreach (var childStatement in FindThrowStatements(statement.ChildNodes().OfType<StatementSyntax>()))
-                        yield return childStatement;
+                    if (statement is ThrowStatementSyntax)
+                        yield return (ThrowStatementSyntax)statement;
+                    else
+                    {
+                        foreach (var childStatement in FindThrowStatements(statement.ChildNodes().OfType<StatementSyntax>()))
+                            yield return childStatement;
+                    }
                 }
             }
         }
